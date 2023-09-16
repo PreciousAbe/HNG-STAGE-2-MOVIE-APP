@@ -1,0 +1,58 @@
+This is your css file .side_main {
+  background: rgb(157, 143, 143);
+  width: 20%;
+  height: 175vh;
+  border-radius: 0 35px 35px 0;
+}
+.sections_one {
+  margin-left: 8%;
+  padding-top: 14%;
+  display: flex;
+  gap: 2rem;
+}
+.sections_one h2 {
+  cursor: pointer;
+  padding-top: 4%;
+}
+
+.sections_two {
+  cursor: pointer;
+  margin-left: 20%;
+  margin-top: 36%;
+  display: flex;
+  gap: 1rem;
+}
+.sections_two img {
+  padding-top: 1.5%;
+}
+
+.sections_three {
+  cursor: pointer;
+  margin-left: 20%;
+  margin-top: 26%;
+  display: flex;
+  gap: 1rem;
+}
+.sections_three img {
+  padding-top: 1.5%;
+}
+
+.info__ {
+  border-radius: 10%;
+  margin-top: 30%;
+  padding-bottom: 4%;
+  justify-content: center;
+  margin-left: 17%;
+  width: 70%;
+  border: 2px solid #be123c;
+}
+.info__ h2 {
+  margin-top: 20%;
+}
+.info__ h3 {
+  margin-top: 10%;
+}
+#botton_ {
+  width: 8vw;
+  color: #be123c;
+}
