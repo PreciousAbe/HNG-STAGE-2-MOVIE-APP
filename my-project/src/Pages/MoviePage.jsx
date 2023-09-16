@@ -1,93 +1,46 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
+import React, { useState } from "react"
+import { useParams } from "react-router-dom"
+import MovieDetails from "../components/MovieDetails"
+import VideoPlayer from "../components/VideoPlayer"
 
-function MovieDetails() {
-  const [movieDetails, setMovieDetails] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
+const MoviePage = () => {
+  const { id } = useParams()
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  useEffect(() => {
-    async function fetchMovieDetails() {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.REACT_APP_API_KEY}`
-        )
+  const handlePlayClick = () => {
+    setIsPlaying(true)
+  }
 
-        setMovieDetails(response.data)
-        setIsLoading(false)
-      } catch (error) {
-        console.error("Error fetching movie details:", error)
-        setIsLoading(false)
-      }
-    }
-
-    const movieId = 1 // Replace with the actual movie ID you want to fetch
-
-    if (movieId) {
-      fetchMovieDetails()
-    }
-  }, [])
-
-  if (isLoading) {
-    return <p>Loading...</p>
+  // Replace these placeholders with your actual movie data
+  const movieDetails = {
+    id: 1, // Movie ID
+    title: "Movie Title",
+    overview: "Movie Overview",
+    release_date: "2023-09-15",
+    vote_average: 8.5,
+    production_companies: [{ name: "Company Name" }],
+    poster_path: ``,
+    videoUrl: `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`,
   }
 
   return (
     <div>
-      <h1>Title: {movieDetails.title}</h1>
-      <p>Overview: {movieDetails.overview}</p>
-      <p>Release Date: {movieDetails.release_date}</p>
-      <p>Vote Average: {movieDetails.vote_average}</p>
-      <p>Production Company: {movieDetails.production_companies?.[0]?.name}</p>
-      {/* Add other movie details as needed */}
+      {isPlaying ? (
+        <VideoPlayer videoUrl={movieDetails.videoUrl} />
+      ) : (
+        <div onClick={handlePlayClick} style={{ cursor: "pointer" }}>
+          <img
+            src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+          />
+        </div>
+      )}
+      <MovieDetails movieDetails={movieDetails} isLoading={false} />
     </div>
   )
 }
 
-export default MovieDetails
-
-// import React, { useState } from "react"
-// import { useParams } from "react-router-dom"
-// import MovieDetails from "../components/MovieDetails"
-// import VideoPlayer from "../components/VideoPlayer"
-
-// const MoviePage = () => {
-//   const { id } = useParams()
-//   const [isPlaying, setIsPlaying] = useState(false)
-
-//   const handlePlayClick = () => {
-//     setIsPlaying(true)
-//   }
-
-//   // Replace these placeholders with your actual movie data
-//   const movieDetails = {
-//     id: 1, // Movie ID
-//     title: `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`,
-//     overview: "Movie Overview",
-//     release_date: "2023-09-15",
-//     vote_average: 8.5,
-//     production_companies: [{ name: "Company Name" }],
-//     poster_path: ``,
-//     videoUrl: `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`,
-//   }
-
-//   return (
-//     <div>
-//       {isPlaying ? (
-//         <VideoPlayer videoUrl={movieDetails.videoUrl} />
-//       ) : (
-//         <div onClick={handlePlayClick} style={{ cursor: "pointer" }}>
-//           <img
-//             src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
-//             alt={movieDetails.title}
-//           />
-//         </div>
-//       )}
-//       <MovieDetails movieDetails={movieDetails} isLoading={false} />
-//     </div>
-//   )
-// }
-
-// export default MoviePage
+export default MoviePage
 
 // import React, { useState } from "react"
 // import { useParams } from "react-router-dom"
